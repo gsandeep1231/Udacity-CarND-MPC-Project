@@ -25,6 +25,8 @@ I tried with several other combinations of N and dt, like 25/0.05, 20/0.05, 10/0
 ## Preprocessing waypoints
 
 The waypoints were converted to vehicle's coordinate system. Below lines in the code do that:
+
+
           for (int i = 0; i < ptsx.size(); i++) {
             double dx = ptsx[i] - px;
             double dy = ptsy[i] - py;
@@ -32,8 +34,20 @@ The waypoints were converted to vehicle's coordinate system. Below lines in the 
             waypoints_y.push_back(dx * sin(-psi) + dy * cos(-psi));
           }
 
+
 This makes sure the vehicle's position is w.r.t. to its origin which is at (0,0) and its orientation angle is 0 radians.
 
+## MPC with Latency
+
+There are two approaches to deal with the latency in the code.
+* The kinematic model equations use the actuations from previous timesteps which is 100ms earlier since our dt chosen in 0.1. As we need to implement a MPC that handles at least 100ms latency this works good for our model. So I updated the actuatios equations to account for this latency by using below code:
+
+      if (t > 1) {   // use previous actuations to overcome latency
+        delta0 = vars[delta_start + t - 2];
+        a0 = vars[a_start + t - 2];
+      }
+
+* New cost function was used that combines delta and velocity to give better steering control at corners. Other cost functions were also modified by incresing them by certain threshold as described in the lectures to make sure they dont reach zero and the vehicle stops.
 
 
 ---
