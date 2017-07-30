@@ -15,7 +15,8 @@ The actuation outputs are:
 * a - accleration
 * delta - delta of the steering angle
 
-The model uses these states and actuations from every timestep to find the states for the next timesteps based on below equations:
+The model uses these states and actuations from every timestep to find the states for the next timesteps based on below equations:<br>
+
 ![alt tag](./model_eq.png)
 
 ## Choosing N and dt
