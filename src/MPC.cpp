@@ -6,8 +6,8 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 25;
-double dt = 0.05;
+size_t N = 10;
+double dt = 0.1;
 
 // This value assumes the model presented in the classroom is used.
 //
@@ -93,7 +93,11 @@ class FG_eval {
 	  // Only consider the actuation at time t.
 	  AD<double> delta0 = vars[delta_start + t - 1];
 	  AD<double> a0 = vars[a_start + t - 1];
-
+      if (t > 1) {   // use previous actuations to overcome latency
+        delta0 = vars[delta_start + t - 2];
+        a0 = vars[a_start + t - 2];
+      }
+      
 	  AD<double> f0 = coeffs[0] + coeffs[1] * x0;
 	  AD<double> psides0 = CppAD::atan(coeffs[1]);
 	
