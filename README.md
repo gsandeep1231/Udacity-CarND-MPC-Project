@@ -51,7 +51,7 @@ There are two approaches to deal with the latency in the code.
 
 ## Output
 
-Below video shows implementation of MPC kinematic model and vehicle is able to drive around the track without leaving it.
+Below video shows implementation of MPC kinematic model and vehicle is able to drive around the track without leaving it.<br>
 https://youtu.be/XRMxMU4ev2U
 
 ---
