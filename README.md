@@ -49,6 +49,10 @@ There are two approaches to deal with the latency in the code.
 
 * New cost function was used that combines delta and velocity to give better steering control at corners. Other cost functions were also modified by incresing them by certain threshold as described in the lectures to make sure they dont reach zero and the vehicle stops.
 
+## Output
+
+Below video shows implementation of MPC kinematic model and vehicle is able to drive around the track without leaving it.
+https://youtu.be/XRMxMU4ev2U
 
 ---
 
