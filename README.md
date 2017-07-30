@@ -1,6 +1,41 @@
 # CarND-Controls-MPC
 Self-Driving Car Engineer Nanodegree Program
 
+## The Model
+
+The Kinemactic model includes the following states:
+* x   - vehicle X position
+* y   - vehicle Y position
+* psi - vehicle orientation
+* v   - vehicle velocity
+* cte - vehicle cross track error
+* epsi - vehicle orientation (psi) error
+
+The actuation outputs are:
+* a - accleration
+* delta - delta of the steering angle
+
+The model uses these states and actuations from every timestep to find the states for the next timesteps based on below equations:
+
+## Choosing N and dt
+
+The values chosen for N and dt are 10 and 0.1 respectively. These were discussed during the office hours of the project. So there are 10 timesteps and duration of each timestep is 0.1 second which leads to the model predicting 10 states for the next 1 second duration.
+I tried with several other combinations of N and dt, like 25/0.05, 20/0.05, 10/0.8, 10/0.5, 8/0.1, but none gave better results.
+
+## Preprocessing waypoints
+
+The waypoints were converted to vehicle's coordinate system. Below lines in the code do that:
+          for (int i = 0; i < ptsx.size(); i++) {
+            double dx = ptsx[i] - px;
+            double dy = ptsy[i] - py;
+            waypoints_x.push_back(dx * cos(-psi) - dy * sin(-psi));
+            waypoints_y.push_back(dx * sin(-psi) + dy * cos(-psi));
+          }
+
+This makes sure the vehicle's position is w.r.t. to its origin which is at (0,0) and its orientation angle is 0 radians.
+
+
+
 ---
 
 ## Dependencies
