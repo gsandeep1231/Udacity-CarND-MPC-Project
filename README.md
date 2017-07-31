@@ -22,7 +22,11 @@ The model uses these states and actuations from every timestep to find the state
 ## Choosing N and dt
 
 The values chosen for N and dt are 10 and 0.1 respectively. These were discussed during the office hours of the project. So there are 10 timesteps and duration of each timestep is 0.1 second which leads to the model predicting 10 states for the next 1 second duration.
-I tried with several other combinations of N and dt, like 25/0.05, 20/0.05, 10/0.8, 10/0.5, 8/0.1, but none gave better results.
+I tried with several other combinations of N and dt, like 25/0.05, 20/0.05, 10/0.8, 10/0.5, 8/0.1, but none gave better results.<br>
+* Choosing a smaller dt helps have better resolution for estimating future states. If we choose larger dt, by the time we predict the output the vehicle states might have changed a lot thus causing wrong estimation.
+* Having a very large N is also not feasible, as it increases the computation time which will further increase the latency as it may take time to generate the estimates for future timesteps.
+* Time horizon (N * dt) gives set of points in the predicted path where the vehicle position is estimated. With a larger time horizon, the predicted path is much longer for the vehicle.
+
 
 ## Preprocessing waypoints
 
